@@ -58,7 +58,7 @@ export const DevTree = ({ data }: DevTreeProps) => {
     useSensor(TouchSensor, {
       activationConstraint: {
         delay: 0,
-        tolerance: 0,
+        tolerance: 5,
       },
     })
   );
