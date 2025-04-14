@@ -6,6 +6,7 @@ import {
   DragEndEvent,
   closestCenter,
   TouchSensor,
+  PointerSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -47,6 +48,11 @@ export const DevTree = ({ data }: DevTreeProps) => {
   };
 
   const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
     useSensor(TouchSensor, {
       activationConstraint: {
         delay: 250,
