@@ -39,7 +39,9 @@ export const LinkTreeView = () => {
       if (link.name === e.target.name) {
         if (!e.target.value) {
           toast.error("URL is empty!");
-          handleEnableLink(e.target.name);
+          if (link.enabled) {
+            handleEnableLink(e.target.name);
+          }
           return { ...link, url: e.target.value, enabled: false };
         }
         return { ...link, url: e.target.value };
