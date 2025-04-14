@@ -12,7 +12,6 @@ export const HandleView = () => {
     queryKey: ["handle", handle],
     retry: 1,
   });
-  // console.log(handle);
   if (isLoading)
     return (
       <div className="text-white font-bold text-2xl text-center ">

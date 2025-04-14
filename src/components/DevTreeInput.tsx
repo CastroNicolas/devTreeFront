@@ -16,9 +16,9 @@ export const DevTreeInput = ({
   return (
     <div className="bj-white shadow-sm p-5 flex items-centetr gap-2">
       <div
-        className="w-12 h-12 bg-cover"
-        style={{ backgroundImage: `url('/social/icon_${item.name}.svg')` }}
-      ></div>
+  className="min-w-[32px] min-h-[32px] max-w-[48px] max-h-[48px] w-[10vw] h-[10vw] bg-cover bg-center bg-no-repeat"
+  style={{ backgroundImage: `url('/social/icon_${item.name}.svg')` }}
+></div>
       <input
         type="text"
         className=" flex-1 border border-gray-300 rounded-lg"

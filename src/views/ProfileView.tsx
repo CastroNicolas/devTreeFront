@@ -27,14 +27,12 @@ export const ProfileView = () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
     onError: (error) => {
-      // console.error(error);
       toast.error(error.message);
     },
   });
   const uploadImageMutation = useMutation({
     mutationFn: uploadImage,
     onSuccess: (data) => {
-      console.log(data);
       queryClient.setQueryData(["user"], (prevData: User) => {
         return { ...prevData, image: data };
       });

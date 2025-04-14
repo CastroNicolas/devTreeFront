@@ -23,11 +23,8 @@ export const SearchForm = () => {
   const handle = watch("handle");
   const handleSearch = () => {
     const slug = slugify(handle);
-    // console.log(slug);
     mutation.mutate(slug);
   };
-
-  console.log(mutation);
 
   return (
     <form onSubmit={handleSubmit(handleSearch)} className="space-y-5">
