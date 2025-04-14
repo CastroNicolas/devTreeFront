@@ -1,7 +1,14 @@
 import NavigationTabs from "./nav/NavigationTabs";
 import { Link, Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
-import { DndContext, DragEndEvent, closestCenter } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragEndEvent,
+  closestCenter,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import {
   SortableContext,
   verticalListSortingStrategy,
@@ -38,6 +45,15 @@ export const DevTree = ({ data }: DevTreeProps) => {
       });
     }
   };
+
+  const sensors = useSensors(
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 5,
+      },
+    })
+  );
 
   useEffect(() => {
     setEnabledLinks(
@@ -79,6 +95,7 @@ export const DevTree = ({ data }: DevTreeProps) => {
                 {data.description}
               </p>
               <DndContext
+                sensors={sensors}
                 collisionDetection={closestCenter}
                 onDragEnd={handleDragEnd}
               >
