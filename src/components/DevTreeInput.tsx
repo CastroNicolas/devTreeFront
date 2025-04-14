@@ -16,9 +16,9 @@ export const DevTreeInput = ({
   return (
     <div className="bj-white shadow-sm p-5 flex items-centetr gap-2">
       <div
-  className="min-w-[32px] min-h-[32px] max-w-[48px] max-h-[48px] w-[10vw] h-[10vw] bg-cover bg-center bg-no-repeat"
-  style={{ backgroundImage: `url('/social/icon_${item.name}.svg')` }}
-></div>
+        className="min-w-[32px] min-h-[32px] max-w-[48px] max-h-[48px] w-[10vw] h-[10vw] bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url('/social/icon_${item.name}.svg')` }}
+      ></div>
       <input
         type="text"
         className=" flex-1 border border-gray-300 rounded-lg"
@@ -30,8 +30,8 @@ export const DevTreeInput = ({
         checked={item.enabled}
         onChange={() => handleEnableLink(item.name)}
         className={classNames(
-          item.enabled ? "bg-blue-500" : "bg-gray-200",
-          "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          item.enabled ? "bg-blue-500" : "bg-gray-600",
+          "relative inline-flex h-6 w-11 mt-2.5 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         )}
       >
         <span

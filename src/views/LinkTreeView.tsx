@@ -33,11 +33,37 @@ export const LinkTreeView = () => {
     });
     setDevTreeLinks(updatedData);
   }, []);
+  // const handleURLChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const updatedLinks = devTreeLinks.map((link) =>
+  //     link.name === e.target.name ? { ...link, url: e.target.value } : link
+  //   );
+  //   setDevTreeLinks(updatedLinks);
+  // };
   const handleURLChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const updatedLinks = devTreeLinks.map((link) =>
-      link.name === e.target.name ? { ...link, url: e.target.value } : link
-    );
+    const updatedLinks = devTreeLinks.map((link) => {
+      if (link.name === e.target.name) {
+        const newUrl = e.target.value;
+        // Si la URL está vacía, desactivar automáticamente el enlace
+        if (!newUrl.trim()) {
+          return { ...link, url: newUrl, enabled: false };
+        }
+        return { ...link, url: newUrl };
+      }
+      return link;
+    });
     setDevTreeLinks(updatedLinks);
+
+    // Actualizar los datos en queryClient cuando la URL queda vacía
+    const updatedItems = JSON.parse(user.links).map((link: SocialNetwork) => {
+      if (link.name === e.target.name && !e.target.value.trim()) {
+        return { ...link, enabled: false, id: "0" };
+      }
+      return link;
+    });
+    queryClient.setQueryData(["user"], (prevData: User) => ({
+      ...prevData,
+      links: JSON.stringify(updatedItems),
+    }));
   };
 
   const links: SocialNetwork[] = JSON.parse(user.links);
