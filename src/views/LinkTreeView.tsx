@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { social } from "../data/social";
 import { DevTreeInput } from "../components/DevTreeInput";
-import { isValidURL } from "../utils";
+import { isValidURL, validateSocialUrl } from "../utils";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProfile } from "../api/DevTreeAPI";
@@ -44,10 +44,17 @@ export const LinkTreeView = () => {
           }
           return { ...link, url: e.target.value, enabled: false };
         }
+        if (
+          isValidURL(e.target.value) &&
+          !validateSocialUrl(e.target.value, link.name)
+        ) {
+          toast.error(`Invalid ${link.name} URL format!`);
+          return { ...link, url: e.target.value, enabled: false };
+        }
+        toast.success("URL saved successfully!");
         return { ...link, url: e.target.value };
-      } else {
-        return link;
       }
+      return link;
     });
     setDevTreeLinks(updatedLinks);
   };
@@ -56,12 +63,12 @@ export const LinkTreeView = () => {
   const handleEnableLink = (socialNetwork: string) => {
     const updatedLinks = devTreeLinks.map((item) => {
       if (item.name === socialNetwork) {
-        if (isValidURL(item.url)) {
+        if (isValidURL(item.url) && validateSocialUrl(item.url, item.name)) {
           toast.success(item.enabled ? "Disabled link" : "Enabled link");
           return { ...item, enabled: !item.enabled };
         } else {
           toast.error("URL is not valid!");
-          return item;
+          return { ...item, enabled: false };
         }
       }
       return item;
